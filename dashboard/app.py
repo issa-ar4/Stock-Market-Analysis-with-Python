@@ -329,20 +329,20 @@ def main_dashboard(symbol, df, show_indicators, show_patterns, show_predictions)
             if st.button("Train ML Models"):
                 with st.spinner("Training models... This may take 5-10 minutes"):
                     try:
-                        # Initialize
-                        data_prep = DataPreparation()
+                        # Initialize with DataFrame
+                        data_prep = DataPreparation(df, target_column='close')
                         trainer = ModelTrainer(data_prep)
                         
                         # Train ensemble (faster)
                         st.write("Training Ensemble Model...")
-                        ensemble_results = trainer.train_ensemble(df, symbol, use_xgboost=False)
+                        ensemble_results = trainer.train_ensemble(symbol, use_xgboost=False)
                         
                         st.success("✅ Ensemble Model Trained!")
                         st.write(f"Test RMSE: {ensemble_results['test_metrics']['rmse']:.4f}")
                         st.write(f"Direction Accuracy: {ensemble_results['test_metrics']['direction_accuracy']:.2f}%")
                         
                         # Make predictions
-                        predictions = trainer.predict_future(df, steps=5, model_type='ensemble')
+                        predictions = trainer.predict_future(steps=5, model_type='ensemble')
                         
                         st.write("**Predictions (Next 5 Days):**")
                         pred_df = pd.DataFrame({

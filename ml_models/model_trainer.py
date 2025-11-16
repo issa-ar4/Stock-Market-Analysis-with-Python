@@ -75,12 +75,12 @@ class ModelTrainer:
         logger.info(f"Training LSTM model for {symbol}")
         
         # Prepare features
-        df_features = self.data_prep.prepare_features(df)
+        df_features = self.data_prep.prepare_features()
         
         # Create target
         df_features = self.data_prep.create_target(
             df_features,
-            target_col=target_col,
+            horizon=1,
             target_type=target_type
         )
         
@@ -152,7 +152,7 @@ class ModelTrainer:
         
         return results
     
-    def train_ensemble(self, df: pd.DataFrame, symbol: str,
+    def train_ensemble(self, symbol: str,
                       test_split: float = 0.15,
                       validation_split: float = 0.15,
                       target_col: str = 'close',
@@ -175,13 +175,13 @@ class ModelTrainer:
         """
         logger.info(f"Training ensemble model for {symbol}")
         
-        # Prepare features
-        df_features = self.data_prep.prepare_features(df)
+        # Prepare features (uses df from DataPreparation.__init__)
+        df_features = self.data_prep.prepare_features()
         
         # Create target
         df_features = self.data_prep.create_target(
             df_features,
-            target_col=target_col,
+            horizon=1,
             target_type=target_type
         )
         
@@ -274,8 +274,8 @@ class ModelTrainer:
         logger.info(f"Performing {n_splits}-fold time series cross-validation")
         
         # Prepare features
-        df_features = self.data_prep.prepare_features(df)
-        df_features = self.data_prep.create_target(df_features, target_col, target_type)
+        df_features = self.data_prep.prepare_features()
+        df_features = self.data_prep.create_target(df_features, horizon=1, target_type=target_type)
         df_features = df_features.dropna()
         
         # Separate features and target
@@ -337,13 +337,12 @@ class ModelTrainer:
         
         return cv_results
     
-    def predict_future(self, df: pd.DataFrame, steps: int = 5,
+    def predict_future(self, steps: int = 5,
                       model_type: str = 'lstm') -> np.ndarray:
         """
         Predict future values
         
         Args:
-            df: Stock data DataFrame
             steps: Number of steps to predict
             model_type: Type of model to use ('lstm' or 'ensemble')
             
@@ -357,7 +356,7 @@ class ModelTrainer:
                 raise ValueError("LSTM model not trained")
             
             # Prepare last sequence
-            df_features = self.data_prep.prepare_features(df)
+            df_features = self.data_prep.prepare_features()
             df_scaled, _ = self.data_prep.scale_features(df_features)
             
             # Get last sequence
@@ -371,7 +370,7 @@ class ModelTrainer:
                 raise ValueError("Ensemble model not trained")
             
             # For ensemble, we'll predict one step at a time
-            df_features = self.data_prep.prepare_features(df)
+            df_features = self.data_prep.prepare_features()
             predictions = []
             
             for i in range(steps):
