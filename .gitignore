@@ -41,6 +41,11 @@ data/models/*.pkl
 *.db
 *.sqlite
 
+# Results and generated files
+results/*.html
+results/*.png
+results/*.jpg
+
 # Jupyter Notebooks
 .ipynb_checkpoints/
 *.ipynb
