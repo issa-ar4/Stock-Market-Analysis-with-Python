@@ -1,0 +1,31 @@
+STOCK MARKET ANALYSIS PLATFORM - TEST RESULTS
+================================================================================
+
+Test Date: 2025-11-16 01:20:06
+
+DATA:
+  Symbol: AAPL
+  Records: 124
+  Period: 2025-05-21 to 2025-11-14
+  Latest Price: $272.41
+  Period Return: +35.08%
+
+TECHNICAL ANALYSIS:
+  RSI: 0.00
+  MACD: 0.00
+
+MACHINE LEARNING:
+  Models Trained: 0
+  Models: None
+
+BACKTEST RESULTS:
+
+Momentum Strategy:
+  Return: +0.00%
+  Sharpe Ratio: 0.00
+  Trades: 0
+
+Mean Reversion Strategy:
+  Return: +4.80%
+  Sharpe Ratio: 1.13
+  Trades: 2

@@ -1,0 +1,57 @@
+# Core Dependencies
+python-dotenv==1.0.0
+requests==2.31.0
+
+# Data Ingestion
+yfinance==0.2.33
+alpha-vantage==2.3.1
+finnhub-python==2.4.19
+websocket-client==1.6.4
+
+# Data Processing
+pandas==2.1.4
+numpy==1.26.2
+pytz==2023.3
+
+# Database
+SQLAlchemy==2.0.23
+psycopg2-binary==2.9.9
+alembic==1.13.0
+
+# Caching
+redis==5.0.1
+
+# Technical Analysis (will be used in Section 2)
+ta==0.11.0
+TA-Lib==0.4.28
+
+# Visualization (Section 2)
+plotly==5.18.0
+dash==2.14.2
+mplfinance==0.12.10b0
+
+# Machine Learning (Section 3)
+tensorflow>=2.16.0
+scikit-learn>=1.3.2
+
+# Web Framework (Section 3)
+flask==3.0.0
+flask-cors==4.0.0
+fastapi==0.108.0
+uvicorn==0.25.0
+streamlit==1.29.0
+
+# Trading (Section 4)
+backtrader==1.9.78.123
+alpaca-trade-api==3.0.2
+
+# Async Tasks
+celery==5.3.4
+
+# Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+
+# Utilities
+python-dateutil==2.8.2
+schedule==1.2.0
